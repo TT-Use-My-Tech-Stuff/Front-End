@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
+import schema from "./formSchema"
 
 const Page = styled.div``;
 
@@ -12,7 +13,7 @@ const initialFormValues = {
 
 const initialFormErrors = {
 	username: "Please enter a valid username.",
-	password: "Your password was incorrect.",
+	password: "Please enter a valid password.",
 };
 
 const Login = () => {
@@ -33,7 +34,7 @@ const Login = () => {
 			.then(() => {
 				setFormErrors({
 					...formErrors,
-					[username]: " ",
+					[username]: "",
 				});
 			})
 			.catch((err) => {
@@ -59,6 +60,14 @@ const Login = () => {
 		});
 	}, [formValues]);
 
+    const onChange = (e) => {
+        setFormValues({
+            ...formValues,
+            [e.target.name]: e.target.value,
+          });
+        // console.log(formValues);
+    }
+
     const onSubmit = (e) => {
 		e.preventDefault();
 		submitHandler();
@@ -74,6 +83,7 @@ const Login = () => {
                     <input
                     type="text"
                     name='username'
+                    placeholder='username'
                     value={formValues.username}
                     onChange={onChange}
                     />
@@ -84,15 +94,20 @@ const Login = () => {
 					<input
 						type="password"
 						name="password"
+                        placeholder='password'
 						value={formValues.password}
 						onChange={onChange}
 					/>
 				</label>
 
-                <button disabled={submitDisabled}> Submit </button>
+                <button disabled={submitDisabled}> Log in </button>
             </form>
+            
+            {(formValues.username.length < 5) || (formValues.password.length < 5) && (<div><p> {formErrors.username} </p> <p> {formErrors.password} </p></div>)}
+            
         </div>
-    </Page>;
+    </Page>
+
 };
 
 export default Login;
