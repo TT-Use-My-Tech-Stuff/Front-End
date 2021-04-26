@@ -91,7 +91,7 @@ const Home = () => {
             <InfoDiv>
                 <InfoTitle>What Is "Use My Tech Stuff"?</InfoTitle>
                 <Info>
-                    Tech stuff is EXPENSIVE. Tech stuff that's only needed once or twice isn't worth the cost. Talk to equipment owners directly and get the tech you need faster.
+                    Tech stuff is EXPENSIVE. Tech stuff that's only needed once or twice isn't worth the cost. Talk to equipment owners directly and get the tech you need faster. 
                 </Info>
                 <Info>
                     We cut out the middleman. That means your rentals are cheaper and the owners keep more of the profits! Rent for a day, a week, even a month or more - extend your rental at any time.
