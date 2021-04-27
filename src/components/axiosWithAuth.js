@@ -10,3 +10,5 @@ export const axiosWithAuth = () => {
         baseURL: "https://back-end-tt.herokuapp.com/",
     })
 }
+
+export default axiosWithAuth;
