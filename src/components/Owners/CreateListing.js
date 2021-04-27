@@ -15,6 +15,7 @@ const CreateListing = () => {
   const [item, setItem] = useState({
     itemName: "Test",
     ownerName:"Test",
+    description: "Test"
   });
 
   const handleChange = (e) => {
@@ -35,7 +36,7 @@ const handleSubmit = (e) => {
     .catch((err) => console.log({ err }));
 }
 
-const { itemName, ownerName} = item;
+const { itemName, ownerName, description} = item;
 
   return (
     <Page>
@@ -59,6 +60,15 @@ const { itemName, ownerName} = item;
             value={ownerName}
             onChange={handleChange}
             name="ownername"
+            type="text"
+          />
+          </div>
+          <div>
+          <label>Description: </label>
+          <input
+            value={description}
+            onChange={handleChange}
+            name="description"
             type="text"
           />
           </div>

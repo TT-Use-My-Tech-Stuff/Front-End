@@ -16,6 +16,7 @@ const EditListing = () => {
   const [item, setItem] = useState({
     itemName: "Test",
     ownerName:"Test",
+    description: "Test"
   });
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const EditListing = () => {
     });
   };
 
-  const { itemName, ownerName} = item;
+  const { itemName, ownerName, description} = item;
 
   return (
     <Page>
@@ -67,6 +68,16 @@ const EditListing = () => {
             value={ownerName}
             onChange={handleChange}
             name="ownername"
+            type="text"
+          />
+          </div>
+          <br></br>
+          <div>
+          <label>Description: </label>
+          <input
+            value={description}
+            onChange={handleChange}
+            name="description"
             type="text"
           />
           </div>
