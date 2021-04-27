@@ -105,4 +105,5 @@ const EditListing = () => {
     )
 }
 
-export default EditListing
+
+export default EditListing;

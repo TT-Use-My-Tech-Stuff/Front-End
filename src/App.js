@@ -45,11 +45,12 @@ function App() {
           <OwnerHome/>
         </Route>
 
-        <Route path = "/owner/create-listing">
+        <Route path = "/create-listing">
           <CreateListing/>
         </Route>
 
-        <Route exact path = "/edit-listing">
+
+        <Route path = "/edit-listing">
           <EditListing/>
         </Route>
 
