@@ -6,13 +6,7 @@ import * as yup from "yup";
 import schema from "./formSchema";
 import axios from "axios";
 
-const Page = styled.div`
-	color: red;
-	display: flex;
-	justify-content: space-between;
-
-
-`;
+const Page = styled.div``;
 
 
 const CreateUser = () => {
@@ -92,8 +86,9 @@ const Login = (props) => {
 
 	return (
 		<Page>
-			<div>
-				<form onSubmit={onSubmit}>
+			
+			<div className="formContainer">
+				<form className='loginForm' onSubmit={onSubmit}>
 					<label className="name">
 						{" "}
 						Username:
@@ -122,7 +117,7 @@ const Login = (props) => {
 
 				{formValues.username.length < 5 ||
 					(formValues.password.length < 5 && (
-						<div>
+						<div >
 							<p> {formErrors.username} </p> <p> {formErrors.password} </p>
 						</div>
 					))}
