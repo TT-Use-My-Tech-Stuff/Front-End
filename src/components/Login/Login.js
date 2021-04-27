@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -13,15 +14,11 @@ const Page = styled.div`
 
 `;
 
-const initialFormValues = {
-	username: "",
-	password: "",
-};
 
-const initialFormErrors = {
-	username: "Please enter a valid username.",
-	password: "Please enter a valid password.",
-};
+const CreateUser = () => {
+
+    
+
 
 const Login = (props) => {
 	// /login
@@ -61,11 +58,11 @@ const Login = (props) => {
 		setUsername([...username, newUser]);
 	};
 
-	useEffect(() => {
-		schema.isValid(formValues).then((valid) => {
-			setSubmitDisabled(!valid);
-		});
-	}, [formValues]);
+
+    const inputChange = e => {
+        e.persist()
+        validate(e)
+
 
 	const onChange = (e) => {
 		setFormValues({
@@ -134,4 +131,11 @@ const Login = (props) => {
 	);
 };
 
-export default Login;
+
+const StyledInput = styled.input`
+border: 2px solid white;
+border-radius: 5px;
+width: 30vw;
+margin: 1.2% auto;
+padding: 1.4% 0 1.4% 1.2%;
+`
