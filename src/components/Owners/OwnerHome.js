@@ -43,7 +43,7 @@ const OwnerHome = () => {
     <Page>
       <div>
         <h1>Owners Home</h1>
-        <p>Username: </p>
+        <p>Username:    </p>
 
         {userInfo.map((user) => ( 
         <div key={user.equipment_id}>
