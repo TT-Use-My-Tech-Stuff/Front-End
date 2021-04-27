@@ -1,18 +1,106 @@
 import styled from 'styled-components'
-import {useHistory} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Route, Link, Switch } from 'react-router-dom'
+import axios from 'axios'
 
-const Page = styled.div``
+const Page = styled.div`
+border: 1px black dotted;
+color: black;
+height: 40vh;
+margin-top: 10%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.formDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+input {
+    margin-top: 5%;
+}
+button {
+    margin-top: 5%;
+}
+`
 
 const EditListing = () => {
+    const [listing, setListing] = useState({})
+    const [disabled, setDisabled] = useState(true)
+    const {push}=useHistory()
+    const { id } = useParams()
 
-    // /owner/edit-listing
+    let listingId = id
+
+    useEffect(() => {
+        axios
+          .get(`https://back-end-tt.herokuapp.com/api/equipment/1`) // /id
+          .then(response => {
+            console.log(response.data)
+            setListing(response.data)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
+
+      const onChange = (evt) => {
+        const { name, value } = evt.target;
+        setListing({...listing, [name]: value})
+      };
+
+      const submitEditedListing = () => {
+        axios
+        .put('https://back-end-tt.herokuapp.com/api/equipment/1', listing)
+        .then(res => {
+            push('/owner/:id')
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+      }
+
+    // /owner/edit-listing/:id
     // allow only profiles that are owners
     // edit a current item for rent that will be displayed on the owners' home page
     // form validation
-    
+    // axios.get
+
     return(
         <Page>
-
+            <form onSubmit={submitEditedListing}>
+               <h2>Edit Listing:</h2>
+               <div className='formDiv'>
+                   <label>
+                       Edit equipment name:
+                       <input
+                       type="text"
+                       name="equipment_name"
+                       value={listing.equipment_name}
+                       onChange={onChange}
+                       />
+                   </label>
+                   <label>
+                       Edit equipment description:
+                       <input
+                       type="text"
+                       name="equipment_description"
+                       value={listing.equipment_description}
+                       onChange={onChange}
+                       />
+                   </label>
+                    <button>submit changes</button>
+               </div>
+            </form>
         </Page>
     )
 }
