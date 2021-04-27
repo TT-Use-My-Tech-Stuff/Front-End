@@ -5,6 +5,7 @@ import cables from '../images/cables.jpg'
 import cameras from '../images/cameras.jpg'
 import computerSetup from '../images/computer-setup.jpg'
 import recordingEquipment from '../images/recording-equipment.jpg'
+import axios from 'axios'
 
 const Page = styled.div`
     background-color: black;
@@ -60,6 +61,7 @@ const InfoTitle = styled.h3`
 const Info = styled.p`
     padding: .5rem 0;
     text-align: justify;
+
 `
 
 const Home = () => {

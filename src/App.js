@@ -1,4 +1,5 @@
 import {Switch, Route} from 'react-router-dom'
+import React, { useState } from 'react';
 
 //Pages
 import Home from './components/Home/Home'
@@ -19,6 +20,10 @@ import MarketplaceHome from './components/Marketplace/MarketplaceHome'
 import MarketItem from './components/Marketplace/MarketItem'
 
 function App() {
+
+  
+  
+
   return (
     <div>
       <Switch>
@@ -59,8 +64,8 @@ function App() {
           <RenterHome/>
         </Route>
 
-        <Route path = "/renter/cart">
-          <Cart/>
+        <Route path = "/cart">
+          <Cart  />
         </Route>
 
         <Route path = "/marketplace">
