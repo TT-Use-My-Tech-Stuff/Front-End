@@ -1,92 +1,109 @@
-import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
-import { axiosWithAuth } from "../axiosWithAuth";
-import { useEffect } from "react";
+import styled from 'styled-components'
+import {useHistory, useParams} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Route, Link, Switch } from 'react-router-dom'
+import axios from 'axios'
 
-const Page = styled.div``;
+const Page = styled.div`
+border: 1px black dotted;
+color: black;
+height: 40vh;
+margin-top: 10%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.formDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+input {
+    margin-top: 5%;
+}
+button {
+    margin-top: 5%;
+}
+`
 
 const EditListing = () => {
-  // /owner/edit-listing
-  // allow only profiles that are owners
-  // edit a current item for rent that will be displayed on the owners' home page
-  // form validation
+    const [listing, setListing] = useState({})
+    const [disabled, setDisabled] = useState(true)
+    const {push}=useHistory()
+    const { id } = useParams()
 
-  const { push } = useHistory();
-  const [item, setItem] = useState({
-    itemName: "Test",
-    ownerName:"Test",
-    description: "Test"
-  });
+    let listingId = id
 
-  useEffect(() => {
-    axiosWithAuth()
-      .get("/api/equipment/owner/:id")
-      .then((res) => console.log(res))
-      .catch((err) => console.log({ err }));
-  }, []);
+    useEffect(() => {
+        axios
+          .get(`https://back-end-tt.herokuapp.com/api/equipment/1`) // /id
+          .then(response => {
+            console.log(response.data)
+            setListing(response.data)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axiosWithAuth
-      .post(`/api/equipment/createEquipment/:id`, item)
-      .then((res) => {
-        console.log("create");
-        push(`/owner/:id`);
-      })
-      .catch((err) => console.log({ err }));
-  };
+      const onChange = (evt) => {
+        const { name, value } = evt.target;
+        setListing({...listing, [name]: value})
+      };
 
-  const handleChange = (e) => {
-    setItem({
-      ...item,
-      [e.target.name]: e.target.value,
-    });
-  };
+      const submitEditedListing = () => {
+        axios
+        .put('https://back-end-tt.herokuapp.com/api/equipment/1', listing)
+        .then(res => {
+            push('/owner/:id')
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+      }
 
-  const { itemName, ownerName, description} = item;
+    // /owner/edit-listing/:id
+    // allow only profiles that are owners
+    // edit a current item for rent that will be displayed on the owners' home page
+    // form validation
+    // axios.get
 
-  return (
-    <Page>
-      <h1>Edit Listing </h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          
-          <div>
-          <label>Item Name: </label>
-          <input
-            value={itemName}
-            onChange={handleChange}
-            name="itemname"
-            type="text"
-          />
-          </div>
-          <br></br>
-          <div>
-          <label>Owner Name: </label>
-          <input
-            value={ownerName}
-            onChange={handleChange}
-            name="ownername"
-            type="text"
-          />
-          </div>
-          <br></br>
-          <div>
-          <label>Description: </label>
-          <input
-            value={description}
-            onChange={handleChange}
-            name="description"
-            type="text"
-          />
-          </div>
-        </div>
-        <input type="submit" className="inputbutton" value="Save"/>
-        <Link to={"/owner/:id"}><input type="button" className="inputbutton" value="Cancel"/></Link>
-      </form>
-    </Page>
-  );
-};
+    return(
+        <Page>
+            <form onSubmit={submitEditedListing}>
+               <h2>Edit Listing:</h2>
+               <div className='formDiv'>
+                   <label>
+                       Edit equipment name:
+                       <input
+                       type="text"
+                       name="equipment_name"
+                       value={listing.equipment_name}
+                       onChange={onChange}
+                       />
+                   </label>
+                   <label>
+                       Edit equipment description:
+                       <input
+                       type="text"
+                       name="equipment_description"
+                       value={listing.equipment_description}
+                       onChange={onChange}
+                       />
+                   </label>
+                    <button>submit changes</button>
+               </div>
+            </form>
+        </Page>
+    )
+}
+
 
 export default EditListing;
