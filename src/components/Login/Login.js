@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
-import schema from "./formSchema"
+import schema from "./formSchema";
+import axios from "axios";
 
 const Page = styled.div``;
 
@@ -16,7 +17,7 @@ const initialFormErrors = {
 	password: "Please enter a valid password.",
 };
 
-const Login = () => {
+const Login = (props) => {
 	// /login
 	// Accept a username/email and password
 	// Route to protectedroute after token is received
@@ -60,54 +61,71 @@ const Login = () => {
 		});
 	}, [formValues]);
 
-    const onChange = (e) => {
-        setFormValues({
-            ...formValues,
-            [e.target.name]: e.target.value,
-          });
-        // console.log(formValues);
-    }
+	const onChange = (e) => {
+		setFormValues({
+			...formValues,
+			[e.target.name]: e.target.value,
+		});
+		// console.log(formValues);
+	};
 
-    const onSubmit = (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault();
+		console.log(formValues);
+		axios
+			.post("https://back-end-tt.herokuapp.com/api/users/login", formValues)
+			.then((res) => {
+				console.log("res data", res.data);
+				localStorage.setItem("token", res.data.token);
+				localStorage.setItem("user", res.data.id);
+				props.push("/profile");
+			})
+			.catch((err) => {
+				console.log("ERROR:", err);
+			});
+
 		submitHandler();
 	};
 
+	return (
+		<Page>
+			<div>
+				<form onSubmit={onSubmit}>
+					<label className="name">
+						{" "}
+						Username:
+						<input
+							type="text"
+							name="username"
+							placeholder="username"
+							value={formValues.username}
+							onChange={onChange}
+						/>
+					</label>
+					<label className="password">
+						{" "}
+						Password:
+						<input
+							type="password"
+							name="password"
+							placeholder="password"
+							value={formValues.password}
+							onChange={onChange}
+						/>
+					</label>
 
-	return <Page>
-        <div>
-            <form onSubmit={onSubmit}>
-                <label className='name'>
-                    {' '}
-                    Username:
-                    <input
-                    type="text"
-                    name='username'
-                    placeholder='username'
-                    value={formValues.username}
-                    onChange={onChange}
-                    />
-                </label>
-                <label className='password'>
-					{" "}
-					Password:
-					<input
-						type="password"
-						name="password"
-                        placeholder='password'
-						value={formValues.password}
-						onChange={onChange}
-					/>
-				</label>
+					<button disabled={submitDisabled}> Log in </button>
+				</form>
 
-                <button disabled={submitDisabled}> Log in </button>
-            </form>
-            
-            {(formValues.username.length < 5) || (formValues.password.length < 5) && (<div><p> {formErrors.username} </p> <p> {formErrors.password} </p></div>)}
-            
-        </div>
-    </Page>
-
+				{formValues.username.length < 5 ||
+					(formValues.password.length < 5 && (
+						<div>
+							<p> {formErrors.username} </p> <p> {formErrors.password} </p>
+						</div>
+					))}
+			</div>
+		</Page>
+	);
 };
 
 export default Login;
