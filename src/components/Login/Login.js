@@ -49,7 +49,7 @@ const Login = () => {
 	const submitHandler = (e) => {
 		const newUser = {
 			username: formValues.username.trim(),
-			email: formValues.email.trim(),
+			password: formValues.password.trim(),
 		};
 		setUsername([...username, newUser]);
 	};
