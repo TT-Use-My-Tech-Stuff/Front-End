@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -8,11 +7,25 @@ import axios from "axios";
 
 const Page = styled.div``;
 
+const StyledInput = styled.input`
+border: 2px solid white;
+border-radius: 5px;
+width: 30vw;
+margin: 1.2% auto;
+padding: 1.4% 0 1.4% 1.2%;
+`
 
-const CreateUser = () => {
+const CreateUser = () => {}
 
-    
+const initialFormValues = {
+	username: "",
+	password: ""
+}
 
+const initialFormErrors = {
+	username: "",
+	password: ""
+}
 
 const Login = (props) => {
 	// /login
@@ -28,7 +41,7 @@ const Login = (props) => {
 	const onChangeHandler = (username, value) => {
 		yup
 			.reach(schema, username)
-			.validate(value)
+			// .validate(value)
 			.then(() => {
 				setFormErrors({
 					...formErrors,
@@ -55,8 +68,8 @@ const Login = (props) => {
 
     const inputChange = e => {
         e.persist()
-        validate(e)
-
+        // validate(e)
+	}
 
 	const onChange = (e) => {
 		setFormValues({
@@ -126,11 +139,4 @@ const Login = (props) => {
 	);
 };
 
-
-const StyledInput = styled.input`
-border: 2px solid white;
-border-radius: 5px;
-width: 30vw;
-margin: 1.2% auto;
-padding: 1.4% 0 1.4% 1.2%;
-`
+export default Login
