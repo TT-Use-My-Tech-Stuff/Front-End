@@ -8,7 +8,7 @@ import recordingEquipment from '../images/recording-equipment.jpg'
 import axios from 'axios'
 
 const Page = styled.div`
-    background-color: black;
+    background-color: #01303f;
     color: white;
     font-family: PressStart2P;
     padding: 3rem 0 1rem;
@@ -37,11 +37,12 @@ const LoginSignUp = styled.div`
 const Buttons = styled.button`
     margin: 0 2rem;
     font-family: PressStart2P;
-    background-color: white;
+    background-color: #89d6fb;
     border: none;
     font-size: 2rem;
     padding: 1rem;
     border-radius: 20px;
+    color: #02577a;
 `
 const TagLine = styled.h2`
     font-size: 1.5rem;
