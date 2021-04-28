@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {useHistory} from 'react-router-dom'
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as yup from 'yup'
 import axios from 'axios';
 
 const Page = styled.div``
@@ -85,14 +86,14 @@ const Signup = () => {
    
     return(
         <Page>
-            <form>
+            <form onSubmit={formSubmit}>
                 <label htmlFor='username'>
                     <h3>Username</h3>
                     <input 
                     name='username'
                     type='text'
                     value={formState.username}
-                    onChange={formSubmit} />
+                    onChange={formChange} />
                     <h3>Password</h3>
                 </label>
                 <label htmlFor='password'>
@@ -101,7 +102,7 @@ const Signup = () => {
                     name='password'
                     type='password'
                     value={formState.password}
-                    onChange={formSubmit} />
+                    onChange={formChange} />
                 </label>
                 <label>
                     <h3>What kind of user are you? A renter? An owner? Both??</h3>
@@ -109,7 +110,7 @@ const Signup = () => {
                     name='type'
                     type='text'
                     value={formState.text}
-                    onChange={formSubmit} />
+                    onChange={formChange} />
                 </label>
                 <button disabled={buttonDisabled}>Submit</button>
             </form>
