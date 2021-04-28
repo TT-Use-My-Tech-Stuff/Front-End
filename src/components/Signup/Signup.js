@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import {useHistory} from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import * as yup from 'yup'
 import axios from 'axios';
+import * as yup from 'yup'
 
 const Page = styled.div``
 

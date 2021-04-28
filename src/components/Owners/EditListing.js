@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const Page = styled.div`
 border: 1px black dotted;
-color: black;
+color: #01303f;
 height: 40vh;
 margin-top: 10%;
 display: flex;
@@ -18,6 +18,13 @@ form {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border: 3px #89d6fb solid;
+    padding: 2%;
+    border-radius: 4px;
+    height: 30vh;
+    width: 50vh;
+    background-color: #d4f0fc;
+
 }
 .formDiv {
     display: flex;
@@ -31,10 +38,17 @@ input {
 button {
     margin-top: 5%;
 }
+body {
+    background-color: green;
+}
+
+h2 {
+    font-size: x-large;
+}
 `
 
 const EditListing = () => {
-    const [listing, setListing] = useState({})
+    const [listing, setListing] = useState({equipment_name: '', equipment_description: ''})
     const [disabled, setDisabled] = useState(true)
     const {push}=useHistory()
     const { id } = useParams()

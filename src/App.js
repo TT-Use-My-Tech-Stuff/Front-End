@@ -50,7 +50,7 @@ function App() {
           <OwnerHome/>
         </Route>
 
-        <Route path = "/create-listing">
+        <Route path = "/create-listing/:id">
           <CreateListing/>
         </Route>
 

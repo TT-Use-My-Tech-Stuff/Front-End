@@ -1,84 +1,29 @@
-import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
-import { axiosWithAuth } from "../axiosWithAuth";
-import { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import {axiosWithAuth} from "./axiosWithAuth"
+import {useParams} from "react-router-dom"
 
-const Page = styled.div``;
+export default function CreateListing(props) {
+  const { register, handleSubmit } = useForm();
+  const { id } = useParams();
 
-const CreateListing = () => {
-  // /owner/create-listing
-  // allow only profiles that are owners
-  // create a new object for rent that will be displayed on the owners' home page
-  // form validation
 
-  const { push } = useHistory();
-  const [item, setItem] = useState({
-    itemName: "Test",
-    ownerName:"Test",
-    description: "Test"
-  });
 
-  const handleChange = (e) => {
-    setItem({
-        ...item,
-        [e.target.name]: e.target.value
-    });
-}
-
-const handleSubmit = (e) => {
-    e.preventDefault();
-    axiosWithAuth
-    .post(`/api/equipment/createEquipment/:id`, item)
-    .then((res) => {
-      console.log('create')
-      push(`/owner/:id`);
-    })
-    .catch((err) => console.log({ err }));
-}
-
-const { itemName, ownerName, description} = item;
-
+  const onSubmit = data => 
+    axiosWithAuth()
+      .post(`https://back-end-tt.herokuapp.com/api/equipment/createEquipment/${id}`, data)
+      .then(res => {
+      console.log(res.data);
+      })
+      .catch(err => {
+        console.error(err)
+      })
   return (
-    <Page>
-      <h1>Create Listing </h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          
-          <div>
-          <label>Item Name: </label>
-          <input
-            value={itemName}
-            onChange={handleChange}
-            name="itemname"
-            type="text"
-          />
-          </div>
-          <br></br>
-          <div>
-          <label>Owner Name: </label>
-          <input
-            value={ownerName}
-            onChange={handleChange}
-            name="ownername"
-            type="text"
-          />
-          </div>
-          <div>
-          <label>Description: </label>
-          <input
-            value={description}
-            onChange={handleChange}
-            name="description"
-            type="text"
-          />
-          </div>
-        </div>
-        <input type="submit" className="inputbutton" value="Save"/>
-        <Link to={"/owner/:id"}><input type="button" className="inputbutton" value="Cancel"/></Link>
-      </form>
-      
-    </Page>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input type="text" {...register("equipment_name")} placeholder="equipmentName"/>
+      <input type="text" {...register("equipment_description")} placeholder="description" />
+      <input type="submit" />
+    </form>
   );
-};
+}
 
-export default CreateListing;
