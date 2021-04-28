@@ -1,41 +1,52 @@
 import styled from 'styled-components'
-import {useHistory, useRouteMatch, Link } from 'react-router-dom'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+
 
 
 const Page = styled.div``
 
 const MarketplaceHome = (props) => {
-    const { items } = props
-    const { path } = useRouteMatch()
+    const [items, setItems] = useState([]);
+    
+    useEffect(() => {
+        axios 
+        .get(`https://back-end-tt.herokuapp.com/api/equipment`)
+        .then(response => {
+            setItems(response.data)
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }, []);
+
+
 
     // /marketplace
     // display all items available for rent
     // if chosen to display all items regardless of availability, RENTED needs to be marked on items that cannot currently be rented
     // each item should be able to be routed to a new page that displays all of that items information, where the option to rent will be.
+  
     
-    
-    return(
+    return (
+       
+      
         <Page>
-            {items.map(item => (
-                <div 
-                className='item-card'
-                key={item.id}
-                >
-             <Link to={`${path}cd ..
-          /${item.id}`}>
-            <img
-              className='items-list-image'
-              src={item.imageUrl}
-              alt={item.name}
-            />
-            <p>{item.name}</p>
-          </Link>
-
-              <p>${item.price}</p>
-            </div>
-            ))}
+           {items.map(item => {
+             return (
+                 <Link to={`/marketplace/${item.equipment_id}`}>
+                 <div>
+                 <p> {item.equipment_name} </p>
+                 <br />
+                 </div>
+                 </Link>
+             )
+           })}
         </Page>
+      
+      
     )
 }
 

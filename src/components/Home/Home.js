@@ -77,6 +77,8 @@ const Home = () => {
         push('/signup')
     }
 
+   
+
     return (
         <Page>
             <ImageDiv>

@@ -1,34 +1,32 @@
 import styled from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import MarketplaceHome from './MarketplaceHome'
+import { useParams } from 'react-router'
+
 
 
 const Page = styled.div``
 
 const MarketItem = (props) => {
-    const [item, setItem] = useState();
-    const { itemId } = useParams();
+    const [item, setItem] = useState([]);
+    const { id } = useParams();
 
-    let id = itemId;
+    let itemId = id;
+
 
     useEffect(() => {
         axios 
-        .get(`https://back-end-tt.herokuapp.com/marketplace/${id}`)
+        .get(`https://back-end-tt.herokuapp.com/api/equipment/1`)
         .then(response => {
             setItem(response.data)
+            console.log(response)
         })
         .catch(error => {
             console.log(error);
         })
-    }, [id]);
-
-    if (!item) {
-        return <div>Loading item information...</div>
-    }
-
+    }, [itemId]);
    
-
    
 
     // /marketplace/:id
@@ -41,7 +39,8 @@ const MarketItem = (props) => {
 
     return(
         <Page>
-            
+           <p>Item {item.equipment_name}</p>
+           <p>{item.equipment_description}</p>
         </Page>
     )
 }

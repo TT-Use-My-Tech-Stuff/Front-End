@@ -72,7 +72,7 @@ function App() {
           <MarketplaceHome/>
         </Route>
 
-        <Route path = "/marketplace/:id">
+        <Route exact path = "/marketplace/:id">
           <MarketItem/>
         </Route>
 
