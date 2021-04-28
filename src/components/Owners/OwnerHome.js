@@ -4,7 +4,14 @@ import { axiosWithAuth } from "../axiosWithAuth";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Page = styled.div``;
+const Page = styled.div`
+
+`;
+const ItemBox = styled.div``;
+const Items = styled.p``;
+const Button = styled.button``;
+const Name = styled.h2``;
+const Title = styled.h1``;
 
 const OwnerHome = () => {
   // /owner/:id
@@ -21,17 +28,22 @@ const OwnerHome = () => {
   useEffect(() => {
     axiosWithAuth()
       .get("/api/equipment")
-      .then((res) => {setUserInfo(res.data) 
-        console.log(res.data)})
+      .then((res) => {
+        setUserInfo(res.data);
+        console.log(res.data);
+      })
       .catch((err) => console.log({ err }));
   }, []);
 
-  const deleteItem = (id) => {
+  const deleteItem = (ItemId) => {
     axiosWithAuth()
-      .delete("/api/equipment/deleteEquipment/:id")
+      .delete(`/api/equipment/deleteEquipment/${ItemId}`)
       .then((res) => {
-        setUserInfo(userInfo.filter((item) => item.id !== id));
-        console.log('delete')
+        if (res.data != null) {
+          alert("Listing has been deleted");
+          setUserInfo(userInfo.filter((item) => item.equipment_id !== ItemId));
+          push("/owner/:id");
+        }
       })
       .catch((err) => console.log({ err }));
   };
@@ -41,27 +53,23 @@ const OwnerHome = () => {
   };
   return (
     <Page>
-      <div>
-        <h1>Owners Home</h1>
-        <p>Username:    </p>
-
-        {userInfo.map((user) => ( 
-        <div key={user.equipment_id}>
-        <p>Item: {user.equipment_name} </p>
-        <p>Owner: {user.owner_id}</p>
-        <p>Description: {user.equipment_description}</p>
-        <Link to={`/edit-listing`}>Edit</Link>
-        <br></br>
-        <Link to="/owner/:id"onClick={deleteItem}>Delete Item </Link>
-        </div>
-        ))}
-        
-        <br></br>
-        <Link to="/create-listing">Create Listing</Link><br></br>
-        <Link to="/" onClick={handleLogout}>
-          Logout
-        </Link>
-      </div>
+      <Title>Owners Home</Title>
+      <Name>Username: </Name>
+      {userInfo.map((user) => (
+        <ItemBox key={user.equipment_id}>
+          <Items>Item: {user.equipment_name} </Items>
+          <Items>Owner: {user.owner_id}</Items>
+          <Items>Description: {user.equipment_description}</Items>
+          <Link to={`/edit-listing`}><Button>Edit</Button></Link>
+          <Link to="/owner/:id" onClick={deleteItem}>
+           <Button>Delete Item</Button> 
+          </Link>
+        </ItemBox>
+      ))}
+      <Link to="/create-listing"><Button>Create Listing</Button></Link>
+      <Link to="/" onClick={handleLogout}>
+        <Button>Logout</Button>
+      </Link>
     </Page>
   );
 };
