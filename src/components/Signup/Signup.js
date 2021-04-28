@@ -18,9 +18,17 @@ const Signup = () => {
     // create username/email, password, and indicate whether they are a renter or an owner
     // Route to protectedroute after token is received
     // form validation
+    const memberID = parseInt(localStorage.getItem('member'));
+    const initialData = {
+        member: memberID,
+        username: '',
+        password: '',
+        type: ''
+    };
+
 
     const history = useHistory();
-    const memberID = parseInt(localStorage.getItem('member'));
+    
 
     const [formState, setFormState] = useState(initialData);
     const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -30,12 +38,6 @@ const Signup = () => {
         type: ''
     })
 
-    const initialData = {
-        member: memberID,
-        username: '',
-        password: '',
-        type: ''
-    };
 
     useEffect(() => {
         formSchema.isValid(formState).then(valid => {
@@ -86,15 +88,14 @@ const Signup = () => {
    
     return(
         <Page>
-            <form>
+            <form onSubmit={formSubmit}>
                 <label htmlFor='username'>
                     <h3>Username</h3>
                     <input 
                     name='username'
                     type='text'
                     value={formState.username}
-                    onChange={formSubmit} />
-                    <h3>Password</h3>
+                    onChange={formChange} />
                 </label>
                 <label htmlFor='password'>
                     <h2>Password</h2>
@@ -102,7 +103,7 @@ const Signup = () => {
                     name='password'
                     type='password'
                     value={formState.password}
-                    onChange={formSubmit} />
+                    onChange={formChange} />
                 </label>
                 <label>
                     <h3>What kind of user are you? A renter? An owner? Both??</h3>
@@ -110,7 +111,7 @@ const Signup = () => {
                     name='type'
                     type='text'
                     value={formState.text}
-                    onChange={formSubmit} />
+                    onChange={formChange} />
                 </label>
                 <button disabled={buttonDisabled}>Submit</button>
             </form>
