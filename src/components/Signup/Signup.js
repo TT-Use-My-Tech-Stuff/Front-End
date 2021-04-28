@@ -18,9 +18,17 @@ const Signup = () => {
     // create username/email, password, and indicate whether they are a renter or an owner
     // Route to protectedroute after token is received
     // form validation
+    const memberID = parseInt(localStorage.getItem('member'));
+    const initialData = {
+        member: memberID,
+        username: '',
+        password: '',
+        type: ''
+    };
+
 
     const history = useHistory();
-    const memberID = parseInt(localStorage.getItem('member'));
+    
 
     const [formState, setFormState] = useState(initialData);
     const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -30,12 +38,6 @@ const Signup = () => {
         type: ''
     })
 
-    const initialData = {
-        member: memberID,
-        username: '',
-        password: '',
-        type: ''
-    };
 
     useEffect(() => {
         formSchema.isValid(formState).then(valid => {
@@ -94,7 +96,6 @@ const Signup = () => {
                     type='text'
                     value={formState.username}
                     onChange={formChange} />
-                    <h3>Password</h3>
                 </label>
                 <label htmlFor='password'>
                     <h2>Password</h2>
