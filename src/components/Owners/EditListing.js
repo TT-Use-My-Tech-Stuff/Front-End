@@ -7,24 +7,38 @@ import axios from 'axios'
 const Page = styled.div`
 border: 1px black dotted;
 color: #01303f;
-height: 40vh;
-margin-top: 10%;
+height: 100vh;
 display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
+font-family: impact;
+background-color: #e9ebee;
 form {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border: 3px #89d6fb solid;
+    border: 5px #89d6fb outset;
     padding: 2%;
-    border-radius: 4px;
-    height: 30vh;
-    width: 50vh;
+    border-radius: 7px;
+    height: 40vh;
+    width: 40vw;
     background-color: #d4f0fc;
-
+    background: linear-gradient(-45deg, #d4f0fc, #02a9f7, #e9ebee);
+    background-size: 400% 400%;
+    animation: gradient 8s ease infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 .formDiv {
     display: flex;
@@ -33,10 +47,35 @@ form {
     flex-direction: column;
 }
 input {
-    margin-top: 5%;
+    height: 30px;
+    flex: 0 0 350px;
+    margin-left: 10px;
+    border-radius: 7px;
+    border: 1px black solid;
+    &:hover {
+        transform: scale(1.01);
+        transition: all .3s ease-in-out;
+        box-shadow: 5px 5px 4px #888888;
+      }
+      transition: all .1s ease-in-out;
+    }
 }
 button {
-    margin-top: 5%;
+    color: white;
+    margin-top: 10%;
+    background-color: #02577a;
+    border-radius: 7px;
+    width: 30%;
+    height: 3vh;
+    &:hover {
+        transform: scale(1.1);
+        transition: all .3s ease-in-out;
+        background-color: #89d6fb;
+        box-shadow: 10px 10px 8px #888888;
+        color: #01303f;
+      }
+      transition: all .3s ease-in-out;
+    }
 }
 body {
     background-color: green;
@@ -44,6 +83,20 @@ body {
 
 h2 {
     font-size: x-large;
+    padding-bottom: 5%;
+    animation-duration: 5s;
+    font-family: PressStart2P;
+}
+
+label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    width: 400px;
+    line-height: 26px;
+    margin-bottom: 10px;
+    font-size: large;
 }
 `
 
@@ -83,19 +136,13 @@ const EditListing = () => {
         })
       }
 
-    // /owner/edit-listing/:id
-    // allow only profiles that are owners
-    // edit a current item for rent that will be displayed on the owners' home page
-    // form validation
-    // axios.get
-
     return(
         <Page>
             <form onSubmit={submitEditedListing}>
-               <h2>Edit Listing:</h2>
+               <h2>-- Edit Listing --</h2>
                <div className='formDiv'>
                    <label>
-                       Edit equipment name:
+                       Name:
                        <input
                        type="text"
                        name="equipment_name"
@@ -104,7 +151,7 @@ const EditListing = () => {
                        />
                    </label>
                    <label>
-                       Edit equipment description:
+                       Description:
                        <input
                        type="text"
                        name="equipment_description"
