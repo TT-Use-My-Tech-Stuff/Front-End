@@ -28,32 +28,66 @@ const cartData = [
 ]
 
 const Page = styled.div`
-/* border: 2px solid black; */
+
 display: flex;
 flex-direction: column;
-justify-content: center;
-align-items: center;
 
-div {
-    border: 1px solid black;
+align-items: center;
+background-color: #02577a;
+
+height: 100vh;
+
+
+
+
+`
+const Checkout = styled.div `
+ border-radius: 30px 0% 30px 0;
     margin: 1%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 30%;
-}
-button {
-    width: 15%;
-    margin: 1%;
     
-
-}
-p {
-    margin: 1%;
+    
+    background-color: #01303f;
+button {
+    background-color:#02577a;
+    color: #01303f;
+    margin: 1%
 }
 
 `
+const Items = styled.div `
+border-radius: 30px 0% 30px 0;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    background-color: #01303f;
+    color: #02a9f7;
+button {
+    background-color: #02577a;
+    color:#01303f;
+    margin: 1%
+}
+p {
+    margin: 1%
+}
+
+`
+const ItemWrapper = styled.div `
+
+width: 100%;
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+
 
 
 const Cart = () => {
@@ -61,20 +95,38 @@ const Cart = () => {
     
     
     return(
-        <Page>
-            {cartData.map(item => {
-                return (
-                    <div>
-                        <p>name: {item.name}</p>
-                        <p>description: {item.equipment_description}</p>
-                        <button>Remove</button>
-                         
-                    </div>
-                   
-                )
-            })}
+        <>
+            <Page>
+                
+                    
+                    
+                            <ItemWrapper>
+                                {cartData.map(item => {
+                                    return (
 
-        </Page>
+                                        <Items>
+                                            <p>name: {item.name}</p>
+                                            <p>description: {item.equipment_description}</p>
+                                            <button>Remove</button>
+
+                                        </Items>
+                                    )
+
+                                })}
+                                
+                         
+                            </ItemWrapper>
+                            <Checkout>
+                                <button>Checkout</button>
+                            </Checkout>
+                    
+                   
+                    
+                
+
+            </Page>
+           
+        </>
     )
 }
 
