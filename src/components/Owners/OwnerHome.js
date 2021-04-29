@@ -103,7 +103,7 @@ const OwnerHome = () => {
           </tr>
         </thead>
         {userInfo
-        .filter(item => (item.owner_id == userId) && item)
+        .filter(item => (item.owner_id == userId) && item) // eslint-disable-line
         .map((user) => (
           <tbody key={user.equipment_id}>
             

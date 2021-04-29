@@ -1,7 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom'
-import OwnerHome from './Owners/OwnerHome';
-import RenterHome from './Renters/RenterHome';
+
 
 // This is where you protect routes so users need a token to access
 

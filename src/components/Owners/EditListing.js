@@ -140,7 +140,7 @@ const EditListing = () => {
           .catch(error => {
             console.error(error);
           });
-      }, []);
+      }, [listingId]);
 
       const onChange = (evt) => {
         const { name, value } = evt.target;
