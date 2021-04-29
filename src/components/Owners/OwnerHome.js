@@ -81,7 +81,7 @@ const OwnerHome = () => {
     <Page><Title>Owners Home</Title>
       <Header>
       <Name>Username: </Name>
-      <Link to={`/create-listing/:id`}>
+      <Link to={`/create-listing/`}>
         <Button>Create Listing</Button>
       </Link>
       <Link to="/" onClick={handleLogout}>

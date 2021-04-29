@@ -41,11 +41,11 @@ function App() {
         </Route>
 
       {/* Owner Accessible */}
-        <Route exact path = "/owner/:id">
+        <Route exact path = "/owner/">
           <OwnerHome/>
         </Route>
 
-        <Route path = "/owner/create-listing">
+        <Route path = "/create-listing/">
           <CreateListing/>
         </Route>
 
@@ -56,7 +56,7 @@ function App() {
         </Route>
 
       {/* Renter Accessible */}
-        <Route path = "/renter/:id">
+        <Route path = "/renter/">
           <RenterHome/>
         </Route>
 
