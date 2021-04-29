@@ -5,27 +5,55 @@ import * as yup from "yup";
 import schema from "./formSchema";
 import axios from "axios";
 
-const Page = styled.div``;
+const Page = styled.div`
+	background-color: #01303f;
+	color: white;
+	height: 100vh;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	font-family: PressStart2P;
 
-const StyledInput = styled.input`
-border: 2px solid white;
-border-radius: 5px;
-width: 30vw;
-margin: 1.2% auto;
-padding: 1.4% 0 1.4% 1.2%;
-`
+	h1 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		width: 90%;
+		margin: 10px auto;
+	}
 
-const CreateUser = () => {}
+	.loginForm {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		background-color: #02577a;
+		padding: 10px;
+		border-radius: 5px;
+		width: 60%;
+		margin: auto;
+	}
+	label {
+		padding: 5px;
+	}
+
+	input {
+		background-color: #02a9f7;
+	}
+`;
+
+const CreateUser = () => {};
 
 const initialFormValues = {
 	username: "",
-	password: ""
-}
+	password: "",
+};
 
 const initialFormErrors = {
 	username: "",
-	password: ""
-}
+	password: "",
+};
 
 const Login = (props) => {
 	// /login
@@ -64,12 +92,16 @@ const Login = (props) => {
 		};
 		setUsername([...username, newUser]);
 	};
+	useEffect(() => {
+		schema.isValid(formValues).then((valid) => {
+			setSubmitDisabled(!valid);
+		});
+	}, [formValues]);
 
-
-    const inputChange = e => {
-        e.persist()
-        // validate(e)
-	}
+	// const inputChange = (e) => {
+	// 	e.persist();
+	// 	// validate(e)
+	// };
 
 	const onChange = (e) => {
 		setFormValues({
@@ -99,16 +131,16 @@ const Login = (props) => {
 
 	return (
 		<Page>
-			
+			<h1>ALL YOUR USERNAME ARE BELONG TO US</h1>
 			<div className="formContainer">
-				<form className='loginForm' onSubmit={onSubmit}>
+				<form className="loginForm" onSubmit={onSubmit}>
 					<label className="name">
 						{" "}
 						Username:
 						<input
 							type="text"
 							name="username"
-							placeholder="username"
+							// placeholder="username"
 							value={formValues.username}
 							onChange={onChange}
 						/>
@@ -119,7 +151,7 @@ const Login = (props) => {
 						<input
 							type="password"
 							name="password"
-							placeholder="password"
+							// placeholder="password"
 							value={formValues.password}
 							onChange={onChange}
 						/>
@@ -130,7 +162,7 @@ const Login = (props) => {
 
 				{formValues.username.length < 5 ||
 					(formValues.password.length < 5 && (
-						<div >
+						<div>
 							<p> {formErrors.username} </p> <p> {formErrors.password} </p>
 						</div>
 					))}
@@ -139,4 +171,4 @@ const Login = (props) => {
 	);
 };
 
-export default Login
+export default Login;

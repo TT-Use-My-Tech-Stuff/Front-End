@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import styled from "styled-components";
+import styled from "styled-components";
 import { Link, useParams, useHistory } from "react-router-dom";
 import axiosWithAuth from "../axiosWithAuth.js";
 
@@ -26,47 +26,102 @@ const RenterHome = () => {
         history.push("/");
     };
 
-    // /renter/:id
-    // + allows the renter to see everything they are currently renting
-    // + allows the renter to go to their cart
-    // allows the renter to request rent termination(maybe)
-    // + allows the renter to go to the marketplace
-    // + allows the renter to logout
-
     return (
-        <div>
-            <div>
+        <Page>
+            <Nav>
                 <Link to="/">Home</Link>
                 <Link to="/marketplace">Marketplace</Link>
                 <Link to="/renter/cart">Cart</Link>
                 <Link to="/" onClick={logout}>
                     Logout
                 </Link>
-            </div>
+            </Nav>
             <div>
-                <h1>Rentals:</h1>
-                <div>
+                <Title>Current rentals:</Title>
+                <Cards>
                     {rental.map((item) => {
                         return (
-                            <div>
+                            <EquipmentCards>
                                 <div>
                                     <ul>
-                                        <li>Equipment name: {item.equipment_name}</li>
-                                        <li>Equipment ID: {item.equipment_id}</li>
-                                        <li>Equipment Description: {item.equipment_description}</li>
+                                        <li>
+                                            Equipment name:{" "}
+                                            {item.equipment_name}
+                                        </li>
+                                        <li>
+                                            Equipment ID: {item.equipment_id}
+                                        </li>
+                                        <li>
+                                            Equipment Description:{" "}
+                                            {item.equipment_description}
+                                        </li>
                                         <li>Owner ID: {item.owner_id}</li>
                                         <li>Renter ID: {item.renter_id}</li>
                                     </ul>
                                 </div>
-                            </div>
+                            </EquipmentCards>
                         );
                     })}
-                </div>
+                </Cards>
             </div>
-        </div>
+        </Page>
     );
 };
 
-// const Page = styled.div``;
+const Nav = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #02577a;
+    a:link {
+        text-decoration: none;
+        color: white;
+    }
+    a:visited {
+        text-decoration: none;
+        color: white;
+    }
+`;
+
+const Title = styled.h1`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #01303f;
+    font-weight: 1000;
+    font-size: 2.5rem;
+    line-height: 50px;
+    letter-spacing: 2px;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+`;
+
+const Page = styled.div`
+    background-color: #89d6fb;
+    padding-bottom: 30rem;
+`;
+
+const EquipmentCards = styled.div`
+    background: #ffffff;
+    border: 1px solid #b8b8b8;
+    border-radius: 20px;
+    padding: 20px;
+    padding-left: 2rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: rgba(0, 0, 0, 0.4);
+`;
+
+const Cards = styled.div`
+    display: grid;
+    justify-content: center;
+    align-items: center;
+`;
 
 export default RenterHome;

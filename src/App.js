@@ -49,7 +49,11 @@ function App() {
           <CreateListing/>
         </Route>
 
+
+    
         <Route path = "/owner/edit-listing">
+
+    
           <EditListing/>
         </Route>
 
