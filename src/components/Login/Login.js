@@ -147,10 +147,11 @@ const Login = (props) => {
 				console.log("res data", res.data);
 				localStorage.setItem("token", res.data.token);
 				localStorage.setItem("user", res.data.id);
+				localStorage.setItem("type", res.data.user.user_type)
 				history.push("/protectedRoute");
 			})
 			.catch((err) => {
-				console.log("ERROR:", err);
+				console.log("ERROR:", err.response);
 			});
 
 		submitHandler();
