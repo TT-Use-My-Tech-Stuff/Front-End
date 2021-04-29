@@ -105,7 +105,7 @@ const OwnerHome = () => {
                 <td>{user.owner_id}</td>
                 <td>{user.equipment_description}</td>
                 <td>
-                  <Link to={`/edit-listing/${user.equipment_id}`}>
+                  <Link to={`/owner/edit-listing/${user.equipment_id}`}>
                     <Button>Edit</Button>
                   </Link>
                 </td>
