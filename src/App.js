@@ -55,7 +55,7 @@ function App() {
         </Route>
 
 
-        <Route path = "/edit-listing">
+        <Route path = "/edit-listing/:id">
           <EditListing/>
         </Route>
 

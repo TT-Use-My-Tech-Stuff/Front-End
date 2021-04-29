@@ -5,7 +5,6 @@ import { Route, Link, Switch } from 'react-router-dom'
 import axios from 'axios'
 
 const Page = styled.div`
-border: 1px black dotted;
 color: #01303f;
 height: 100vh;
 display: flex;
@@ -13,7 +12,7 @@ align-items: center;
 justify-content: center;
 flex-direction: column;
 font-family: impact;
-background-color: #e9ebee;
+background-color: #01303f;
 form {
     display: flex;
     align-items: center;
@@ -47,9 +46,8 @@ form {
     flex-direction: column;
 }
 input {
-    height: 30px;
-    flex: 0 0 350px;
-    margin-left: 10px;
+    flex: 0 0 20px;
+
     border-radius: 7px;
     border: 1px black solid;
     &:hover {
@@ -62,11 +60,13 @@ input {
 }
 button {
     color: white;
-    margin-top: 10%;
+    margin-top: 5%;
     background-color: #02577a;
     border-radius: 7px;
-    width: 30%;
+    width: 35%;
     height: 3vh;
+    font-family: PressStart2P;
+    font-size: .7rem;
     &:hover {
         transform: scale(1.1);
         transition: all .3s ease-in-out;
@@ -90,14 +90,33 @@ h2 {
 
 label {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    text-align: right;
-    width: 400px;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    width: 30vw;
     line-height: 26px;
     margin-bottom: 10px;
-    font-size: large;
+    font-size: small;
+    font-family: PressStart2P;
 }
+@media(max-width: 1080px) {
+    h2 {
+        font-size: large;
+        margin-bottom: 15%;
+        margin-top: -8%;
+    }
+    button {
+        margin-top: 15%;
+    }
+  }
+@media(max-width: 830px) {
+    h2 {
+        font-size: small;
+    }
+    button {
+        width: 100%;
+    }
+  }
 `
 
 const EditListing = () => {
@@ -108,9 +127,14 @@ const EditListing = () => {
 
     let listingId = id
 
+    const onSubmit = evt => {
+        evt.preventDefault()
+        submitEditedListing()
+    }
+
     useEffect(() => {
         axios
-          .get(`https://back-end-tt.herokuapp.com/api/equipment/1`) // /id
+          .get(`https://back-end-tt.herokuapp.com/api/equipment/${listingId}`)
           .then(response => {
             console.log(response.data)
             setListing(response.data)
@@ -127,7 +151,7 @@ const EditListing = () => {
 
       const submitEditedListing = () => {
         axios
-        .put('https://back-end-tt.herokuapp.com/api/equipment/1', listing)
+        .put(`https://back-end-tt.herokuapp.com/api/equipment/${id}`, listing)
         .then(res => {
             push('/owner/:id')
         })
@@ -138,7 +162,7 @@ const EditListing = () => {
 
     return(
         <Page>
-            <form onSubmit={submitEditedListing}>
+            <form onSubmit={onSubmit}>
                <h2>-- Edit Listing --</h2>
                <div className='formDiv'>
                    <label>
@@ -150,7 +174,7 @@ const EditListing = () => {
                        onChange={onChange}
                        />
                    </label>
-                   <label>
+                   <label id='desc_label'>
                        Description:
                        <input
                        type="text"
