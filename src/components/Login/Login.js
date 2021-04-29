@@ -31,19 +31,44 @@ const Page = styled.div`
 		background-color: #02577a;
 		padding: 10px;
 		border-radius: 5px;
-		width: 60%;
+		width:40%;
 		margin: auto;
 	}
+
 	label {
 		padding: 5px;
+		display:flex;
+		justify-content: center;
+	}
+
+	button{
+		width: 50%;
+		margin: auto;
 	}
 
 	input {
 		background-color: #02a9f7;
 	}
+
+	@media (max-width: 500px) {
+
+		.loginForm {
+			width: 75%;
+
+}
+	} 
+
+	@media (max-width: 800px) {
+
+.loginForm {
+	width: 65%;
+
+}
+
+} 
 `;
 
-const CreateUser = () => {};
+// const CreateUser = () => {};
 
 const initialFormValues = {
 	username: "",
@@ -145,6 +170,7 @@ const Login = (props) => {
 							// placeholder="username"
 							value={formValues.username}
 							onChange={onChange}
+							onChangeHandler={onChangeHandler}
 						/>
 					</label>
 					<label className="password">
@@ -156,6 +182,7 @@ const Login = (props) => {
 							// placeholder="password"
 							value={formValues.password}
 							onChange={onChange}
+							onChangeHandler={onChangeHandler}
 						/>
 					</label>
 
@@ -165,7 +192,7 @@ const Login = (props) => {
 				{formValues.username.length < 5 ||
 					(formValues.password.length < 5 && (
 						<div>
-							<p> {formErrors.username} </p> <p> {formErrors.password} </p>
+							{/* <p> {formErrors.username} </p> <p> {formErrors.password} </p> */}
 						</div>
 					))}
 			</div>
