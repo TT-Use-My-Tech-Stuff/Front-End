@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 
 const cartData = [
@@ -58,7 +59,9 @@ p {
 
 const Cart = () => {
     
-    
+    useEffect(() => {
+        console.log(localStorage.cart)
+    }, []);
     
     return(
         <Page>

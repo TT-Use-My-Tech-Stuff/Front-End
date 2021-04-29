@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+
+import MarketplaceCard from './MarketplaceCard'
 
 
 
@@ -9,6 +11,8 @@ const Page = styled.div``
 
 const MarketplaceHome = (props) => {
     const [items, setItems] = useState([]);
+
+    const {push} = useHistory()
     
     useEffect(() => {
         axios 
@@ -23,7 +27,6 @@ const MarketplaceHome = (props) => {
     }, []);
 
 
-
     // /marketplace
     // display all items available for rent
     // if chosen to display all items regardless of availability, RENTED needs to be marked on items that cannot currently be rented
@@ -36,12 +39,7 @@ const MarketplaceHome = (props) => {
         <Page>
            {items.map(item => {
              return (
-                 <Link to={`/marketplace/${item.equipment_id}`}>
-                 <div>
-                 <p> {item.equipment_name} </p>
-                 <br />
-                 </div>
-                 </Link>
+               <MarketplaceCard item={item}/>
              )
            })}
         </Page>
