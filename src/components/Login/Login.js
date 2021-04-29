@@ -149,6 +149,7 @@ const Login = (props) => {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("user", res.data.user.user_id);
                 localStorage.setItem("type", res.data.user.user_type)
+                localStorage.setItem("username", res.data.user.username)
                 history.push("/protectedRoute");
             })
             .catch((err) => {
