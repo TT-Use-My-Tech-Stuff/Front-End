@@ -14,9 +14,9 @@ const ProtectedRoute = () => {
     <div>
     {
       userType === "owner"
-      ? <OwnerHome/> 
+      ? <Redirect to="/owner"/> 
       : userType === "renter"
-        ? <RenterHome/>
+        ? <Redirect to="/renter"/>
         : <Redirect to='/login'/>
     }
     </div>
