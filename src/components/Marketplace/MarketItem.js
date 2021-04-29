@@ -41,6 +41,7 @@ button {
 p {
     margin: 1%;
 }
+
 `
 
 const Buttons = styled.button`

@@ -22,6 +22,11 @@ bottom: 1px;
 width: 100%;
 }
 
+h1 {
+    border-bottom: 1px solid white;
+    font-size: 25px;
+}
+
 div {
     padding: 1px;
     margin: 1%;
@@ -67,6 +72,10 @@ const MarketplaceHome = (props) => {
        
       
         <Page>
+            <h1>Marketplace Items</h1>
+            <br/>
+            <br/>
+            <br/>
            {items.map(item => {
              return (
                <MarketplaceCard key={item.equipment_id} item={item}/>
