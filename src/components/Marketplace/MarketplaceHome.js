@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link, useHistory } from 'react-router-dom'
+
 
 import MarketplaceCard from './MarketplaceCard'
 
@@ -12,7 +12,7 @@ const Page = styled.div``
 const MarketplaceHome = (props) => {
     const [items, setItems] = useState([]);
 
-    const {push} = useHistory()
+    
     
     useEffect(() => {
         axios 
