@@ -16,7 +16,7 @@ background-color: #01303f;
     color: white;
     font-family: PressStart2P;
     padding: 3rem 0 1rem;   
-position: absolute;
+/* position: absolute; */
 top: 1px; 
 bottom: 1px; 
 width: 100%;
