@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import {useHistory, useParams} from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { Route, Link, Switch } from 'react-router-dom'
 import axios from 'axios'
 
 const Page = styled.div`
@@ -121,7 +120,6 @@ label {
 
 const EditListing = () => {
     const [listing, setListing] = useState({equipment_name: '', equipment_description: ''})
-    const [disabled, setDisabled] = useState(true)
     const {push}=useHistory()
     const { id } = useParams()
 

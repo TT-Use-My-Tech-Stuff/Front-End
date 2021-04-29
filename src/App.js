@@ -41,7 +41,7 @@ function App() {
         </Route>
 
       {/* Owner Accessible */}
-        <Route path = "/owner/:id">
+        <Route exact path = "/owner/:id">
           <OwnerHome/>
         </Route>
 
@@ -51,9 +51,7 @@ function App() {
 
 
     
-        <Route path = "/owner/edit-listing">
-
-    
+        <Route path = "/owner/edit-listing/:id">
           <EditListing/>
         </Route>
 
