@@ -93,9 +93,6 @@ display: flex;
 
 const Cart = () => {
     
-    useEffect(() => {
-        console.log(localStorage.cart)
-    }, []);
     
     return(
         <>
