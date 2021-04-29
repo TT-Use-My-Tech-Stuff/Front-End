@@ -9,6 +9,7 @@ import MarketplaceCard from './MarketplaceCard'
 
 const Page = styled.div``
 
+
 const MarketplaceHome = (props) => {
     const [items, setItems] = useState([]);
 
