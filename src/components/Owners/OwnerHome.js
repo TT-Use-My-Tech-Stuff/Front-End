@@ -5,13 +5,39 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const Page = styled.div`
+color: white;
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+background-color: #01303f;
+`;
+const Header =styled.div`
+display: flex;
+
 
 `;
-const ItemBox = styled.div``;
-const Items = styled.p``;
-const Button = styled.button``;
-const Name = styled.h2``;
-const Title = styled.h1``;
+const Table =styled.table`
+font-size: 25px;
+
+`;
+const Button = styled.button`
+color: #fff;
+background-color: #6c757d;
+padding: .2rem .5rem;
+font-size: 1rem;
+cursor: pointer;
+
+}
+`;
+const Name = styled.h2`
+font-size: 18px;
+`;
+const Title = styled.h1`
+font-size: 30px;
+`;
+
 
 const OwnerHome = () => {
   // /owner/:id
@@ -52,24 +78,47 @@ const OwnerHome = () => {
     localStorage.removeItem("token");
   };
   return (
-    <Page>
-      <Title>Owners Home</Title>
+    <Page><Title>Owners Home</Title>
+      <Header>
       <Name>Username: </Name>
-      {userInfo.map((user) => (
-        <ItemBox key={user.equipment_id}>
-          <Items>Item: {user.equipment_name} </Items>
-          <Items>Owner: {user.owner_id}</Items>
-          <Items>Description: {user.equipment_description}</Items>
-          <Link to={`/edit-listing`}><Button>Edit</Button></Link>
-          <Link to="/owner/:id" onClick={deleteItem}>
-           <Button>Delete Item</Button> 
-          </Link>
-        </ItemBox>
-      ))}
-      <Link to="/create-listing"><Button>Create Listing</Button></Link>
+      <Link to={`/create-listing/:id`}>
+        <Button>Create Listing</Button>
+      </Link>
       <Link to="/" onClick={handleLogout}>
         <Button>Logout</Button>
-      </Link>
+        </Link>
+      </Header>
+      <Table>
+        
+        <thead>
+          <tr>
+            <td>Item</td>
+            <td>Owner</td>
+            <td>Description</td>
+          </tr>
+        </thead>
+        {userInfo.map((user) => (
+          <tbody key={user.equipment_id}>
+            
+              <tr>
+                <td>{user.equipment_name} </td>
+                <td>{user.owner_id}</td>
+                <td>{user.equipment_description}</td>
+                <td>
+                  <Link to={`/edit-listing/${user.equipment_id}`}>
+                    <Button>Edit</Button>
+                  </Link>
+                </td>
+                <td>
+                  <Link to="/owner/:id" onClick={deleteItem}>
+                    <Button>Delete Item</Button>
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+        ))}
+        
+      </Table>
     </Page>
   );
 };
