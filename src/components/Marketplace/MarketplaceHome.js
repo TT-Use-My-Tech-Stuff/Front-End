@@ -7,7 +7,36 @@ import MarketplaceCard from './MarketplaceCard'
 
 
 
-const Page = styled.div``
+const Page = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background-color: #01303f;
+    color: white;
+    font-family: PressStart2P;
+    padding: 3rem 0 1rem;   
+position: absolute;
+top: 1px; 
+bottom: 1px; 
+width: 100%;
+}
+
+div {
+    padding: 1px;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+p {
+    margin: 0.5%;
+}
+
+`
 
 
 const MarketplaceHome = (props) => {
@@ -40,7 +69,7 @@ const MarketplaceHome = (props) => {
         <Page>
            {items.map(item => {
              return (
-               <MarketplaceCard item={item}/>
+               <MarketplaceCard key={item.equipment_id} item={item}/>
              )
            })}
         </Page>

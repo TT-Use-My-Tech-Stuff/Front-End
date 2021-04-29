@@ -8,7 +8,51 @@ import {useHistory} from 'react-router-dom'
 
 
 
-const Page = styled.div``
+const Page = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background-color: #01303f;
+    color: white;
+    font-family: PressStart2P;
+    padding: 3rem 0 1rem;
+position: absolute;
+top: 1px; 
+bottom: 1px; 
+width: 100%;
+}
+
+div {
+    border: 1px solid black;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+button {
+    width: 26%;
+    margin: 1%;
+}
+
+p {
+    margin: 1%;
+}
+`
+
+const Buttons = styled.button`
+    margin: 0 2rem;
+    background-color: #89d6fb;
+    font-family: PressStart2P;
+    border: none;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 20px;
+    color: #02577a;
+`
 
 const MarketItem = (props) => {
     const [item, setItem] = useState([]);
@@ -56,8 +100,8 @@ const MarketItem = (props) => {
         <Page>
            <p>{item.equipment_name}</p>
            <p>{item.equipment_description}</p>
-           <button onClick={routeToCart}>Rent</button>
-           <button onClick={routeToMarket}>Back to Marketplace</button>
+           <Buttons onClick={routeToCart}>Rent</Buttons>
+           <Buttons onClick={routeToMarket}>Back to Marketplace</Buttons>
         </Page>
     )
 }
