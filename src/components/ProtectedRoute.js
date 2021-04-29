@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import axiosWithAuth from './axiosWithAuth';
+import React from 'react';
+import {Redirect} from 'react-router-dom'
 import OwnerHome from './Owners/OwnerHome';
 import RenterHome from './Renters/RenterHome';
 
@@ -16,7 +15,9 @@ const ProtectedRoute = () => {
     {
       userType === "owner"
       ? <OwnerHome/> 
-      : <RenterHome/>
+      : userType === "renter"
+        ? <RenterHome/>
+        : <Redirect to='/login'/>
     }
     </div>
   )
