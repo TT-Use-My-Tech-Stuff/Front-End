@@ -60,6 +60,8 @@ const Login = (props) => {
 	// Accept a username/email and password
 	// Route to protectedroute after token is received
 	// form validation
+
+
 	const history = useHistory();
 	const [username, setUsername] = useState([]);
 	const [formValues, setFormValues] = useState(initialFormValues);
@@ -120,7 +122,7 @@ const Login = (props) => {
 				console.log("res data", res.data);
 				localStorage.setItem("token", res.data.token);
 				localStorage.setItem("user", res.data.id);
-				history.push("/profile");
+				history.push("/protectedRoute");
 			})
 			.catch((err) => {
 				console.log("ERROR:", err);
