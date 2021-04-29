@@ -51,12 +51,17 @@ const OwnerHome = () => {
   const [userInfo, setUserInfo] = useState([]);
   const { push } = useHistory();
 
+  const userId = localStorage.getItem("user")
+  const username = localStorage.getItem("username")
+
+
   useEffect(() => {
     axiosWithAuth()
       .get("/api/equipment")
       .then((res) => {
         setUserInfo(res.data);
         console.log(res.data);
+        
       })
       .catch((err) => console.log({ err }));
   }, []);
@@ -80,7 +85,7 @@ const OwnerHome = () => {
   return (
     <Page><Title>Owners Home</Title>
       <Header>
-      <Name>Username: </Name>
+      <Name>{username}</Name>
       <Link to={`/create-listing/`}>
         <Button>Create Listing</Button>
       </Link>
@@ -93,16 +98,18 @@ const OwnerHome = () => {
         <thead>
           <tr>
             <td>Item</td>
-            <td>Owner</td>
+            
             <td>Description</td>
           </tr>
         </thead>
-        {userInfo.map((user) => (
+        {userInfo
+        .filter(item => (item.owner_id == userId) && item)
+        .map((user) => (
           <tbody key={user.equipment_id}>
             
               <tr>
                 <td>{user.equipment_name} </td>
-                <td>{user.owner_id}</td>
+                
                 <td>{user.equipment_description}</td>
                 <td>
                   <Link to={`/owner/edit-listing/${user.equipment_id}`}>
