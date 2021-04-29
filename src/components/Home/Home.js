@@ -5,7 +5,7 @@ import cables from '../images/cables.jpg'
 import cameras from '../images/cameras.jpg'
 import computerSetup from '../images/computer-setup.jpg'
 import recordingEquipment from '../images/recording-equipment.jpg'
-import axios from 'axios'
+
 
 const Page = styled.div`
     background-color: #01303f;
