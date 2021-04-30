@@ -73,7 +73,7 @@ const OwnerHome = () => {
         if (res.data != null) {
           alert("Listing has been deleted");
           setUserInfo(userInfo.filter((item) => item.equipment_id !== ItemId));
-          push("/owner/:id");
+          push("/owner");
         }
       })
       .catch((err) => console.log({ err }));
