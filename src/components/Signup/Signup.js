@@ -9,8 +9,15 @@ const Page = styled.div``
 const formSchema = yup.object().shape({
     username: yup.string().required('Please enter a username'),
     password: yup.string().required('Please enter a password'),
-    type: yup.string().required('Are you a renter, owner or both?')
+    user_type: yup.string().required('Are you a renter, owner or both?')
 });
+
+const initialData = {
+    // member: memberID,
+    username: '',
+    password: '',
+    user_type: ''
+};
 
 const Signup = () => {
 
@@ -18,13 +25,8 @@ const Signup = () => {
     // create username/email, password, and indicate whether they are a renter or an owner
     // Route to protectedroute after token is received
     // form validation
-    const memberID = parseInt(localStorage.getItem('member'));
-    const initialData = {
-        member: memberID,
-        username: '',
-        password: '',
-        type: ''
-    };
+    // const memberID = parseInt(localStorage.getItem('member'));
+    
 
 
     const history = useHistory();
@@ -35,9 +37,8 @@ const Signup = () => {
     const [errorState, setErrorState] = useState({
         username: '',
         password: '',
-        type: ''
+        user_type: ''
     })
-
 
     useEffect(() => {
         formSchema.isValid(formState).then(valid => {
@@ -69,22 +70,14 @@ const Signup = () => {
 
     const formSubmit = evt => {
         evt.preventDefault();
-        axios.post('/api/users/register', formState)
+        axios.post('https://back-end-tt.herokuapp.com/api/users/register', formState)
         .then(res => {
-            localStorage.setItem('token', res.data.token);
-            history.push('/profile')
+            history.push("/login");
         })
         .catch(err => 
             console.log(err.response))
         setFormState(initialData)
     };
-
-
-
-
-
-
-
    
     return(
         <Page>
@@ -107,11 +100,17 @@ const Signup = () => {
                 </label>
                 <label>
                     <h3>What kind of user are you? A renter? An owner? Both??</h3>
-                     <input
+                    <input type="radio" id="renter" name="user_type" value="renter" onChange={formChange}/>
+                    <label for = "renter">renter</label>
+                    <input type="radio" id="owner" name="user_type" value="owner" onChange={formChange}/>
+                    <label for = "owner">owner</label>
+                    <input type="radio" id="both" name="user_type" value="both" onChange={formChange}/>
+                    <label for = "both">both</label>
+                     {/* <input
                     name='type'
                     type='text'
                     value={formState.text}
-                    onChange={formChange} />
+                    onChange={formChange} /> */}
                 </label>
                 <button disabled={buttonDisabled}>Submit</button>
             </form>
