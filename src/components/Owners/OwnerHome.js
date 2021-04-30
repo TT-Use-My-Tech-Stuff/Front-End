@@ -117,7 +117,7 @@ const OwnerHome = () => {
                   </Link>
                 </td>
                 <td>
-                  <Link to="/owner/:id" onClick={deleteItem}>
+                  <Link to="/owner/" onClick={deleteItem}>
                     <Button>Delete Item</Button>
                   </Link>
                 </td>
