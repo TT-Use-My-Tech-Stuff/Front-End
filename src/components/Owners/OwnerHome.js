@@ -62,15 +62,15 @@ const OwnerHome = () => {
       .catch((err) => console.log({ err }));
   }, []);
 
-  const deleteItem = (id) => {
-    axiosWithAuth()
-      .delete(`/api/equipment/deleteEquipment/${id}`)
-      .then((res) => {
-        console.log(res)
-        }
-      )
-      .catch((err) => console.log( err ));
-  };
+  // const deleteItem = (id) => {
+  //   axiosWithAuth()
+  //     .delete(`/api/equipment/deleteEquipment/${id}`)
+  //     .then((res) => {
+  //       console.log(res)
+  //       }
+  //     )
+  //     .catch((err) => console.log( err ));
+  // };
 
   // function bagel(){ 
   //   alert('send me to heaven sooner')
