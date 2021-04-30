@@ -105,7 +105,7 @@ const Signup = () => {
                     <input type="radio" id="owner" name="user_type" value="owner" onChange={formChange}/>
                     <label for = "owner">owner</label>
                     <input type="radio" id="both" name="user_type" value="both" onChange={formChange}/>
-                    <label for = "both">renter</label>
+                    <label for = "both">both</label>
                      {/* <input
                     name='type'
                     type='text'
