@@ -12,6 +12,7 @@ const Page = styled.div`
     color: white;
     font-family: PressStart2P;
     padding: 3rem 0 1rem;
+    height:100vh;
 `
 const ImageDiv = styled.div`
     display: flex;
