@@ -4,7 +4,40 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup'
 
-const Page = styled.div``
+const Page = styled.div`
+    background-color: #01303f;
+    color: white;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: PressStart2P;
+    label {
+        padding: 5px;
+        display:flex;
+        justify-content: center;
+    }
+
+    button{
+        width: 80%;
+        margin: auto;
+    }
+
+    input {
+        background-color: #02a9f7;
+    }
+    .registerForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #02577a;
+        padding: 10px;
+        border-radius: 5px;
+        width:40%;
+        margin: auto;
+    }
+`
 
 const formSchema = yup.object().shape({
     username: yup.string().required('Please enter a username'),
@@ -81,7 +114,7 @@ const Signup = () => {
    
     return(
         <Page>
-            <form onSubmit={formSubmit}>
+            <form className="registerForm" onSubmit={formSubmit}>
                 <label htmlFor='username'>
                     <h3>Username</h3>
                     <input 
