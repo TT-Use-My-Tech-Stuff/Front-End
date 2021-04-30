@@ -151,7 +151,7 @@ const EditListing = () => {
         axios
         .put(`https://back-end-tt.herokuapp.com/api/equipment/${id}`, listing)
         .then(res => {
-            push('/owner/:id')
+            push('/owner/')
         })
         .catch((error) => {
             console.log(error)

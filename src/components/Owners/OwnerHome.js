@@ -15,12 +15,9 @@ background-color: #01303f;
 `;
 const Header =styled.div`
 display: flex;
-
-
 `;
 const Table =styled.table`
 font-size: 25px;
-
 `;
 const Button = styled.button`
 color: #fff;
@@ -28,7 +25,6 @@ background-color: #6c757d;
 padding: .2rem .5rem;
 font-size: 1rem;
 cursor: pointer;
-
 }
 `;
 const Name = styled.h2`
@@ -66,18 +62,21 @@ const OwnerHome = () => {
       .catch((err) => console.log({ err }));
   }, []);
 
-  const deleteItem = (ItemId) => {
+  const deleteItem = (id) => {
     axiosWithAuth()
-      .delete(`/api/equipment/deleteEquipment/${ItemId}`)
+      .delete(`/api/equipment/deleteEquipment/${id}`)
       .then((res) => {
-        if (res.data != null) {
-          alert("Listing has been deleted");
-          setUserInfo(userInfo.filter((item) => item.equipment_id !== ItemId));
-          push("/owner");
+        console.log(res)
         }
-      })
-      .catch((err) => console.log({ err }));
+      )
+      .catch((err) => console.log( err ));
   };
+
+  // function bagel(){ 
+  //   alert('send me to heaven sooner')
+  // }
+
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -117,9 +116,18 @@ const OwnerHome = () => {
                   </Link>
                 </td>
                 <td>
-                  <Link to="/owner/" onClick={deleteItem}>
-                    <Button>Delete Item</Button>
-                  </Link>
+            <div>
+                    <Button onClick={() => {axiosWithAuth()
+      .delete(`/api/equipment/deleteEquipment/${user.equipment_id}`)
+      .then((res) => {
+        console.log(res)
+        push('/owner')
+        window.location.reload();
+        }
+      )
+      .catch((err) => console.log( err ));}}>Delete Item</Button>
+                    {/* <button onClick={() => alert('send me to heaven sooner')}>test</button> */}
+            </div>
                 </td>
               </tr>
             </tbody>
